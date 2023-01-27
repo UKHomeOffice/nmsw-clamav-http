@@ -35,6 +35,9 @@ data:
     # Default: 500
     SendBufTimeout {{.Values.clamav.limits.sendBufTimeout}}
 
+    # Block macros
+    OLE2BlockMacros yes
+
   freshclam.conf: |
     LogTime yes
     LogVerbose yes
