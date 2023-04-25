@@ -81,7 +81,7 @@ clamav:
     cpuTarget: 30
   limits:
     # clamav.limits.fileSize -- The largest file size scanable by clamav, in MB
-    fileSize: 20
+    fileSize: 25
     # clamav.limits.scanSize -- The largest scan size permitted in clamav, in MB
     scanSize: 100
     # clamav.limits.connectionQueueLength -- Maximum length the queue of pending connections may grow to
