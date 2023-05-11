@@ -111,7 +111,7 @@ steps:
   pull: if-not-exists
   image: quay.io/ukhomeofficedigital/helm:latest
   commands:
-  - /run-helm.sh list -n nmsw-staging
+  - /run-helm.sh list -n nmsw
   - helm upgrade --install clamav ./charts/clamav/ -f ./charts/clamav/values.yaml -n nmsw
   environment:
     KUBE_CERTIFICATE_AUTHORITY_DATA:
