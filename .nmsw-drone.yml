@@ -107,6 +107,27 @@ steps:
     target:
     - staging
 
+- name: deploy_to_production
+  pull: if-not-exists
+  image: quay.io/ukhomeofficedigital/helm:latest
+  commands:
+  - /run-helm.sh list -n nmsw-staging
+  - helm upgrade --install clamav ./charts/clamav/ -f ./charts/clamav/values.yaml -n nmsw
+  environment:
+    KUBE_CERTIFICATE_AUTHORITY_DATA:
+      from_secret: PRODUCTION_NMSW_KUBE_CA_DATA
+    KUBE_CLUSTER_NAME:
+      from_secret: PRODUCTION_NMSW_KUBE_CLUSTER_NAME
+    KUBE_SERVER:
+      from_secret: PRODUCTION_NMSW_KUBE_SERVER
+    KUBE_TOKEN:
+      from_secret: PRODUCTION_NMSW_KUBE_TOKEN
+  when:
+    event:
+    - promote
+    target:
+    - production
+
 services:
 - name: docker
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
